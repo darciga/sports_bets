@@ -10,6 +10,7 @@ class Liga(models.Model):
 
 class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
+    liga = models.ForeignKey(Liga, on_delete=models.CASCADE)
 
 
 class Partido(models.Model):
@@ -23,7 +24,6 @@ class Quiniela(models.Model):
     nombre = models.CharField(max_length=100)
     fecha_inicio = models.DateTimeField()
     fecha_fin = models.DateTimeField()
-    puntuacion_maxima = models.IntegerField()
     descripcion = models.TextField()
 
 
@@ -33,6 +33,7 @@ class Seleccion(models.Model):
     partido = models.ForeignKey(Partido, on_delete=models.CASCADE)
     resultado = models.CharField(max_length=10, choices=RESULTS, default='local', verbose_name=_('resultado'))
     tipo = models.CharField(max_length=10, choices=KINDS, default='local', verbose_name=_('tipo_de_seleccion'))
+    monto = models.DecimalField(verbose_name='Monto de la seleccion', max_digits=6, decimal_places=2)
 
 
 class Puntuacion(models.Model):
